@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Светофор</title>
+    <style>
+        body {
+            background: #000 url("fon.png");
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .layer {
+            position: relative;
+            top: 10px;
+            left: 70px;
+        }
+
+        .layer1 {
+            position: relative;
+            top: 200px;
+            left: 360px;
+        }
+
+        .layer2 {
+            position: relative;
+            top: -200px;
+            left: 360px;
+        }
+
+        .layer3 {
+            position: relative;
+            top: 40px;
+            left: 70px;
+        }
+
+        .rotateRight {
+            transform: rotate(270deg);
+        }
+
+        .rotateLeft {
+            transform: rotate(90deg);
+        }
+
+    </style>
+</head>
+<body>
+<div class='layer'>
+    <img src="yellow.png" id="topLamp" height="100px">
+</div>
+
+<div class='layer1'>
+    <img src="yellow.png" id="bottomLamp" height="100px">
+</div>
+
+<div class='layer2'>
+    <img class="rotateRight" src="yellow.png" id="RightLamp" height="100px">
+</div>
+
+<div class='layer3'>
+    <img class="rotateLeft" src="yellow.png" id="LeftLamp" height="100px">
+</div>
+<script>
+    class TrafficLight {
+        timerID;
+        lights = [
+            "red.png",
+            "red.png",
+            "yellow.png",
+            "green.png",
+            "green.png",
+            "yellow.png",
+        ];
+        lights1 = [
+            "green.png",
+            "green.png",
+            "yellow.png",
+            "red.png",
+            "red.png",
+            "yellow.png",
+        ];
+        index = 0;
+
+        light() {
+            document.getElementById("LeftLamp").src = this.lights[this.index];
+            document.getElementById("RightLamp").src = this.lights[this.index];
+            document.getElementById("topLamp").src = this.lights1[this.index];
+            document.getElementById("bottomLamp").src = this.lights1[this.index];
+            this.timerID = setTimeout(() => {
+                this.light()
+            }, 2 * 1000);
+            this.index++;
+            if (this.index === 6) this.index = 0;
+        }
+    }
+
+    let light = new TrafficLight();
+    light.light();
+
+</script>
+
+</body>
+</html>
